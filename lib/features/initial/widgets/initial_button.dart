@@ -17,9 +17,9 @@ class InitialButton extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment(0.8, 1),
             colors: <Color>[
-              Color.fromARGB(249, 22, 22, 22),
-              Color.fromARGB(248, 53, 53, 53),
-              Color.fromARGB(248, 36, 36, 36),
+              Color.fromARGB(248, 58, 45, 45),
+              Color.fromARGB(248, 53, 48, 48),
+              Color.fromARGB(248, 26, 20, 20),
             ]
           ),
           borderRadius: BorderRadius.circular(6),

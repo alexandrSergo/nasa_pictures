@@ -18,7 +18,7 @@ class InitialScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    InitialButton(text: 'Search', onPressed: () {
+                    InitialButton(text: 'Start', onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SearchScreen(),));
                     })
                   ],

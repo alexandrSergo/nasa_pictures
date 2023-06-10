@@ -1,8 +1,7 @@
 import 'package:nasa_app/viewer/view.dart';
 
 class NasaApi {
-
-
+  
   static Future<List?> getNasaPictures() async {
     final dio = Dio();
     try {
