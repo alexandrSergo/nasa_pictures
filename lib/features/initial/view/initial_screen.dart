@@ -1,4 +1,3 @@
-import 'package:nasa_app/features/search/view/search_screen.dart';
 import 'package:nasa_app/viewer/view.dart';
 
 class InitialScreen extends StatelessWidget {

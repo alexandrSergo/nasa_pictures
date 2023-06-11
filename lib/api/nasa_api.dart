@@ -1,11 +1,11 @@
 import 'package:nasa_app/viewer/view.dart';
 
 class NasaApi {
-  
-  static Future<List?> getNasaPictures() async {
-    final dio = Dio();
+  final dio = Dio();
+
+  Future<List?> getNasaPictures() async {
     try {
-      final response = await dio.get(  // Constants.nasaAPICall = https://images-api.nasa.gov/search
+      final response = await dio.get(
         Constants.nasaAPICall,
         queryParameters: {
           "keywords": "galaxy",
@@ -26,8 +26,9 @@ class NasaApi {
       } else {
         return null;
       }
-    } catch (error) {
+    } catch (error, stackTrace) {
       debugPrint(error.toString());
+      debugPrint(stackTrace.toString());
     }
     return null;
   }

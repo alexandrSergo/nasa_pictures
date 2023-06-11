@@ -9,7 +9,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  final NasaPicturesBloc bloc = NasaPicturesBloc();
+  final NasaPicturesBloc bloc = NasaPicturesBloc(NasaApi());
   final TextEditingController controller = TextEditingController();
 
   @override
@@ -86,7 +86,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     bloc: bloc,
                     builder: (context, state) {
                       return Visibility(
-                        visible: state is NasaPicturesLoaded ? true : false,
+                        visible: state is NasaPicturesLoaded,
                         child: CupertinoSearchTextField(
                           controller: controller,
                           style: const TextStyle(color: Colors.white70),

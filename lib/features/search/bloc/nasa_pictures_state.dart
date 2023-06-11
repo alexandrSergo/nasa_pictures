@@ -18,6 +18,12 @@ class NasaPicturesLoaded extends NasaPicturesState {
   List<Object?> get props => [nasaList];
 }
 
+class NasaPicturesLoading extends NasaPicturesState {
+
+  @override
+  List<Object?> get props => [];
+}
+
 class NasaPicturesLoadingFailure extends NasaPicturesState {
 
   @override
