@@ -13,3 +13,4 @@ export 'package:nasa_app/features/search/bloc/nasa_pictures_bloc.dart';
 export 'package:nasa_app/features/search/widgets/error_widget.dart';
 export 'package:nasa_app/features/search/widgets/loading_widget.dart';
 export 'package:nasa_app/features/search/widgets/nasa_picture_widget.dart';
+export 'package:bloc_concurrency/bloc_concurrency.dart';

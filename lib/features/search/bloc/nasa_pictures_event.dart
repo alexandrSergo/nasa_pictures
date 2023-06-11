@@ -10,3 +10,14 @@ class LoadNasaPictures extends NasaPicturesEvent {
   @override
   List<Object?> get props => [completer];
 }
+
+class SearchNasaPictures extends NasaPicturesEvent {
+  SearchNasaPictures(this.query, this.nasaList);
+
+  final String query;
+  final List<dynamic> nasaList;
+
+  @override
+  List<Object?> get props => [query];
+
+}

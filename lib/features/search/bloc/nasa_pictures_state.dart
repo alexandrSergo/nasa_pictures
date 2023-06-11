@@ -8,12 +8,6 @@ class NasaPicturesInitial extends NasaPicturesState {
   List<Object?> get props => throw UnimplementedError();
 }
 
-class NasaPicturesLoading extends NasaPicturesState {
-
-  @override
-  List<Object?> get props => [];
-}
-
 class NasaPicturesLoaded extends NasaPicturesState {
   NasaPicturesLoaded(
     this.nasaList
@@ -28,4 +22,14 @@ class NasaPicturesLoadingFailure extends NasaPicturesState {
 
   @override
   List<Object?> get props => [];
+}
+
+class NasaPicturesSearched extends NasaPicturesState {
+  NasaPicturesSearched(this.nasaList);
+
+  final List<dynamic> nasaList;
+
+  @override
+  List<Object?> get props => [nasaList];
+
 }

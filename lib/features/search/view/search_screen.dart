@@ -1,4 +1,4 @@
-//import 'package:flutter/cupertino.dart';s
+import 'package:flutter/cupertino.dart';
 import 'package:nasa_app/viewer/view.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -10,6 +10,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final NasaPicturesBloc bloc = NasaPicturesBloc();
+  final TextEditingController controller = TextEditingController();
 
   @override
   void initState() {
@@ -18,9 +19,16 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Container(
           decoration: Constants.kBackgroundDecoration,
           child: Stack(
@@ -39,20 +47,17 @@ class _SearchScreenState extends State<SearchScreen> {
                     if (state is NasaPicturesLoaded) {
                       final dataList = state.nasaList;
                       return SingleChildScrollView(
-                        padding: const EdgeInsets.only(top: 70, left: 20, right: 20),
+                        padding: const EdgeInsets.only(top: 60, left: 20, right: 20),
                         physics: const BouncingScrollPhysics(),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column( 
-                            children: List.generate(dataList.length, (index) {
-                              return Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  NasaPictureWidget(nasaPicture: dataList[index],)
-                                ],
-                              );
-                            }),
-                          ),
+                        child: Column( 
+                          children: List.generate(dataList.length, (index) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                NasaPictureWidget(nasaPicture: dataList[index],)
+                              ],
+                            );
+                          }),
                         )
                       );
                     }
@@ -71,24 +76,36 @@ class _SearchScreenState extends State<SearchScreen> {
                   child: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white,),
                 )
               ),
-              // Positioned(
-              //   top: 70,
-              //   right: 20,
-              //   left: 20,
-              //   child: SizedBox(
-              //     height: 60,
-              //     child: CupertinoSearchTextField(
-              //       controller: controller,
-              //       style: const TextStyle(color: Colors.white70),
-              //       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
-              //       itemSize: 22,
-              //       placeholder: 'Search',
-              //       onChanged: (String value) {
-                      
-              //       },
-              //     ),
-              //   )
-              // ),
+              Positioned(
+                top: 4,
+                right: 20,
+                left: 70,
+                child: SizedBox(
+                  height: 60,
+                  child: BlocBuilder<NasaPicturesBloc, NasaPicturesState>(
+                    bloc: bloc,
+                    builder: (context, state) {
+                      return Visibility(
+                        visible: state is NasaPicturesLoaded ? true : false,
+                        child: CupertinoSearchTextField(
+                          controller: controller,
+                          style: const TextStyle(color: Colors.white70),
+                          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
+                          itemSize: 22,
+                          placeholder: 'Search',
+                          onChanged: (String value) {
+                            if ((state is NasaPicturesLoaded) && (value.isNotEmpty)) {
+                              bloc.add(SearchNasaPictures(value, state.nasaList));
+                            } else {
+                              bloc.add(LoadNasaPictures(null));
+                            }
+                          },
+                        ),
+                      );
+                    }, 
+                  ),
+                )
+              ),
             ], 
           ),
         )
