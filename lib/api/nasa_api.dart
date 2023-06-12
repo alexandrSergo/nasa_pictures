@@ -3,7 +3,7 @@ import 'package:nasa_app/viewer/view.dart';
 class NasaApi {
   final dio = Dio();
 
-  Future<List?> getNasaPictures() async {
+  Future<List<NasaPicture>?> getNasaPictures() async {
     try {
       final response = await dio.get(
         Constants.nasaAPICall,
@@ -15,14 +15,12 @@ class NasaApi {
       );
       if (response.statusCode == 200) {
         
-        final List res = (response.data["collection"]["items"]).map((v) {
-          final String url = v["links"][0]["href"];
-          final String title = v["data"][0]["title"];
-          return NasaPicture(url: url, title: title);
+        final List res = (NasaPicture.getJsonList(response.data)).map((v) {
+          return NasaPicture.fromJson(v);
         }).toList();
 
         res.shuffle();
-        return res;
+        return List<NasaPicture>.from(res);
       } else {
         return null;
       }
@@ -32,6 +30,4 @@ class NasaApi {
     }
     return null;
   }
-
-  
 }

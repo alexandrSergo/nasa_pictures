@@ -15,7 +15,7 @@ class SearchNasaPictures extends NasaPicturesEvent {
   SearchNasaPictures(this.query, this.nasaList);
 
   final String query;
-  final List<dynamic> nasaList;
+  final List<NasaPicture> nasaList;
 
   @override
   List<Object?> get props => [query];

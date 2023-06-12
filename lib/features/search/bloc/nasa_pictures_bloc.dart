@@ -12,7 +12,7 @@ class NasaPicturesBloc extends Bloc<NasaPicturesEvent, NasaPicturesState> {
   final NasaApi api;
 
   Future<void> _loadNasaPictures(LoadNasaPictures event, Emitter<NasaPicturesState> emit) async {
-    final nasaList = await api.getNasaPictures();
+    final List<NasaPicture>? nasaList = await api.getNasaPictures();
     if (nasaList != null) {
       emit(NasaPicturesLoaded(nasaList));
       event.completer?.complete(); //?
@@ -23,7 +23,7 @@ class NasaPicturesBloc extends Bloc<NasaPicturesEvent, NasaPicturesState> {
 
    void _searchNasaPictures(SearchNasaPictures event, Emitter<NasaPicturesState> emit) {
     emit(NasaPicturesLoading());
-    final List<dynamic> nasaList = event.nasaList;
+    final List<NasaPicture> nasaList = event.nasaList;
     final String query = event.query;
 
     final newNasaList = nasaList.where((element) => (element.title.toLowerCase().trim()).contains(query.toLowerCase().trim())).toList();

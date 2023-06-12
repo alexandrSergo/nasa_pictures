@@ -12,7 +12,7 @@ class NasaPicturesLoaded extends NasaPicturesState {
   NasaPicturesLoaded(
     this.nasaList
   );
-  final List<dynamic> nasaList;
+  final List<NasaPicture> nasaList;
 
   @override
   List<Object?> get props => [nasaList];
@@ -33,7 +33,7 @@ class NasaPicturesLoadingFailure extends NasaPicturesState {
 class NasaPicturesSearched extends NasaPicturesState {
   NasaPicturesSearched(this.nasaList);
 
-  final List<dynamic> nasaList;
+  final List<NasaPicture> nasaList;
 
   @override
   List<Object?> get props => [nasaList];
